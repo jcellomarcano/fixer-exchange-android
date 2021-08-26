@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.jcellomarcano.fixercurrency.fragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_currencyFragment"
+            app:destination="@id/currencyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currencyFragment"
+        android:name="com.jcellomarcano.fixercurrency.fragment.CurrencyFragment"
+        android:label="fragment_currency"
+        tools:layout="@layout/fragment_currency">
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.jcellomarcano.fixercurrency.model.Currency"
+            />
+    </fragment>
+</navigation>

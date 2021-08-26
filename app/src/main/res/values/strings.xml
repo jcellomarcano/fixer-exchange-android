@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FixerCurrency</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="check_previous_day_value">Check Previous Day Value</string>
+    <string name="rate_placeholder">1 : 777.1234</string>
+    <string name="title_placeholder">EUR : PLN</string>
+    <string name="date_placeholder">Date 2020-07-12</string>
+    <string name="current_exchange_rate">Current rate</string>
+    <string name="money_exchanger">Currency converter</string>
+    <string name="amount_euro">Quantity Euro</string>
+</resources>
