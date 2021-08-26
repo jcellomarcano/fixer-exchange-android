@@ -10,25 +10,28 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
-class MainFragmentViewModel : ViewModel() {
+class MainViewModel : ViewModel() {
 
     private val fixerRepository = FixerRepository
-    val navigateToSelectedProperty = MutableLiveData<Currency>()
+    val navigateToSelectedProperty = MutableLiveData<Currency?>()
     var date = MutableLiveData<Instant>()
-    private var dateForRequestFormatter: DateTimeFormatter = DateTimeFormatter
-        .ofPattern("yyyy-MM-dd")
-        .withZone(ZoneId.systemDefault())
-    private var dateForTextFormatter: DateTimeFormatter = DateTimeFormatter
-        .ofPattern("dd-MM-yyyy")
-        .withZone(ZoneId.systemDefault())
-    enum class updateStatus {COMPLETED, PENDING}
-    var dayFromBeforeUpdateStatus = updateStatus.COMPLETED
-
     var currentFixerResponse = MutableLiveData<FixerResponse>()
     val currenciesList = MutableLiveData<MutableList<Currency>>()
 
+    private var dateForRequestFormatter: DateTimeFormatter = DateTimeFormatter
+        .ofPattern("yyyy-MM-dd")
+        .withZone(ZoneId.systemDefault())
+
+    private var dateForTextFormatter: DateTimeFormatter = DateTimeFormatter
+        .ofPattern("dd-MM-yyyy")
+        .withZone(ZoneId.systemDefault())
+
+    enum class UpdateStatus {COMPLETED, PENDING}
+
+    var dayFromBeforeUpdateStatus = UpdateStatus.COMPLETED
+
     private fun <T> MutableLiveData<T>.notifyObserver() {
-        this.value = this.value
+        this.value
     }
 
     init {
@@ -53,9 +56,10 @@ class MainFragmentViewModel : ViewModel() {
     private fun convertResponseToCurrenciesList(): MutableList<Currency> {
         val currencyList = mutableListOf<Currency>()
         val newDayCurrencyRates: String = currentFixerResponse.value?.rates.toString()
+
         if (newDayCurrencyRates != "null") {
-            val splitedRates = newDayCurrencyRates.split(",")
-            for (rate in splitedRates) {
+            val splitRates = newDayCurrencyRates.split(",")
+            for (rate in splitRates) {
                 val symbolAndRate = rate.split("=")
                 currencyList.add(
                     Currency(
@@ -70,18 +74,18 @@ class MainFragmentViewModel : ViewModel() {
     }
 
     fun getCurrencyListFromDayBefore() {
-        dayFromBeforeUpdateStatus = updateStatus.PENDING
+        dayFromBeforeUpdateStatus = UpdateStatus.PENDING
         date.value = date.value?.minus(1, ChronoUnit.DAYS)
         fixerRepository.getFixerResponse(getFormattedRequestDate())
         getUpdatedCurrenciesList()
-        dayFromBeforeUpdateStatus = updateStatus.COMPLETED
+        dayFromBeforeUpdateStatus = UpdateStatus.COMPLETED
     }
 
-    fun getFormattedRequestDate(): String {
+    private fun getFormattedRequestDate(): String {
         return dateForRequestFormatter.format(date.value)
     }
 
-    fun getFormattedTextDate(): String {
+    private fun getFormattedTextDate(): String {
         return dateForTextFormatter.format(date.value)
     }
 

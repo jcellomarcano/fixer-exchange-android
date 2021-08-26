@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.jcellomarcano.fixercurrency.viewmodel.MainFragmentViewModel" />
+            type="com.jcellomarcano.fixercurrency.viewmodel.MainViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

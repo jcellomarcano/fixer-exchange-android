@@ -10,12 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.jcellomarcano.fixercurrency.databinding.FragmentCurrencyBinding
 import com.jcellomarcano.fixercurrency.model.Currency
-import com.jcellomarcano.fixercurrency.viewmodel.CurrencyFragmentViewModel
+import com.jcellomarcano.fixercurrency.viewmodel.CurrencyViewModel
 import com.jcellomarcano.fixercurrency.viewmodel.CurrencyViewModelFactory
 
 class CurrencyFragment : Fragment() {
     private val args: CurrencyFragmentArgs by navArgs()
-    lateinit var currencyFragmentViewModel: CurrencyFragmentViewModel
+    lateinit var currencyFragmentViewModel: CurrencyViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +28,10 @@ class CurrencyFragment : Fragment() {
         val viewModelFactory = CurrencyViewModelFactory(currency)
         currencyFragmentViewModel = ViewModelProvider(
             this, viewModelFactory
-        ).get(CurrencyFragmentViewModel::class.java)
+        ).get(CurrencyViewModel::class.java)
         binding.viewModel = currencyFragmentViewModel
         binding.exchangeAmount.addTextChangedListener {
-            currencyFragmentViewModel.countExchangeValue(it.toString())
+            currencyFragmentViewModel.onRequestCurrencyConversion(it.toString())
         }
         return binding.root
     }

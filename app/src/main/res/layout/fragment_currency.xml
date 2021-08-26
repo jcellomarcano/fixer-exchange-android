@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.jcellomarcano.fixercurrency.viewmodel.CurrencyFragmentViewModel" />
+            type="com.jcellomarcano.fixercurrency.viewmodel.CurrencyViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

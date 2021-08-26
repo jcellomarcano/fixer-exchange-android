@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jcellomarcano.fixercurrency.model.Currency
 
-class CurrencyFragmentViewModel(currency: Currency) : ViewModel() {
+class CurrencyViewModel(currency: Currency) : ViewModel() {
     val currentCurrency = MutableLiveData<Currency>()
     val exchangeValue = MutableLiveData<String>()
 
@@ -13,13 +13,13 @@ class CurrencyFragmentViewModel(currency: Currency) : ViewModel() {
         exchangeValue.value = ""
     }
 
-    fun countExchangeValue(baseCurrencyAmount: String) {
-        if (baseCurrencyAmount == "") {
+    fun onRequestCurrencyConversion(amount: String) {
+        if (amount.isBlank()) {
             return
         }
         val result = String.format(
             "%.2f",
-            baseCurrencyAmount.toDouble() * currentCurrency.value?.exchangeRate!!.toDouble()
+            amount.toDouble() * currentCurrency.value?.exchangeRate!!.toDouble()
         )
         exchangeValue.value = result + " ${currentCurrency.value?.symbol}"
     }

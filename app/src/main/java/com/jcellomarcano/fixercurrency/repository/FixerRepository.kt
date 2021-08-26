@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter
 
 private const val TAG = "FixerRepository"
 object FixerRepository {
-    private val FIXER_BASE_URL = "http://data.fixer.io/api/"
+    private const val FIXER_BASE_URL = "http://data.fixer.io/api/"
     private val fixerService: FixerService
     private val fixer = MutableLiveData<FixerResponse>()
     val job = Job()
