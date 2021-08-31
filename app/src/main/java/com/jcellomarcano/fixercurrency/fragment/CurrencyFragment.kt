@@ -10,12 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.jcellomarcano.fixercurrency.databinding.FragmentCurrencyBinding
 import com.jcellomarcano.fixercurrency.model.Currency
+import com.jcellomarcano.fixercurrency.model.Symbol
 import com.jcellomarcano.fixercurrency.viewmodel.CurrencyViewModel
 import com.jcellomarcano.fixercurrency.viewmodel.CurrencyViewModelFactory
 
 class CurrencyFragment : Fragment() {
     private val args: CurrencyFragmentArgs by navArgs()
-    lateinit var currencyFragmentViewModel: CurrencyViewModel
+    lateinit var currencyViewModel: CurrencyViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,15 +24,17 @@ class CurrencyFragment : Fragment() {
     ): View? {
         val binding = FragmentCurrencyBinding.inflate(layoutInflater)
         binding.lifecycleOwner = this
-        val currency: Currency = args.selectedProperty
+        val symbol: Symbol = args.selectedProperty
+        val currency = Currency(symbol.symbol, "3.1", "26/08/2021")
 
-        val viewModelFactory = CurrencyViewModelFactory(currency)
-        currencyFragmentViewModel = ViewModelProvider(
+
+        val viewModelFactory = CurrencyViewModelFactory(currency, symbol)
+        currencyViewModel = ViewModelProvider(
             this, viewModelFactory
         ).get(CurrencyViewModel::class.java)
-        binding.viewModel = currencyFragmentViewModel
+        binding.viewModel = currencyViewModel
         binding.exchangeAmount.addTextChangedListener {
-            currencyFragmentViewModel.onRequestCurrencyConversion(it.toString())
+            currencyViewModel.onRequestCurrencyConversion(it.toString())
         }
         return binding.root
     }

@@ -2,11 +2,9 @@ package com.jcellomarcano.fixercurrency.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-import java.io.StringBufferInputStream
 
 @Parcelize
-class Currency(
+data class Symbol(
     val symbol: String,
-    val exchangeRate: String,
-    val date: String,
+    val name: String
 ) : Parcelable

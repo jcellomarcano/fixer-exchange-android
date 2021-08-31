@@ -10,7 +10,6 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/currencies_recyclerview"
-        android:background="@android:color/darker_gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

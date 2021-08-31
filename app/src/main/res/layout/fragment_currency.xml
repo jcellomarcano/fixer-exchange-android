@@ -13,48 +13,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
         tools:context="com.jcellomarcano.fixercurrency.fragment.CurrencyFragment">
 
-        <TextView
-            android:id="@+id/currency_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{`Date ` + viewModel.currentCurrency.date}"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/date_placeholder" />
 
         <TextView
-            android:id="@+id/currency_symbol"
+            android:id="@+id/current_exchange_rate_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:autoSizeTextType="uniform"
-            android:text="@{`EUR : ` + viewModel.currentCurrency.symbol}"
-            android:textSize="30sp"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/title_placeholder" />
+            android:text="@string/money_exchanger"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/baseCurrencyTextView"
+            app:layout_constraintEnd_toEndOf="@+id/baseCurrencyTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/baseCurrencyTextView"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/current_rate_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/current_exchange_rate"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/currency_exchange_value"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/currency_exchange_value"
@@ -62,57 +35,63 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:text="@{`1 : ` + viewModel.currentCurrency.exchangeRate}"
             android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/currency_symbol"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exchanged_value_result"
             tools:text="@string/rate_placeholder" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/exchange_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:hint="@string/amount_euro"
             android:inputType="numberDecimal"
             android:maxLength="11"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/current_rate_title"
-            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/current_exchange_rate_title" />
+            app:layout_constraintBottom_toTopOf="@+id/exchanged_value_result"
+            app:layout_constraintEnd_toEndOf="@+id/exchanged_value_result"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/exchanged_value_result"
+            app:layout_constraintTop_toBottomOf="@+id/baseCurrencyTextView" />
 
         <TextView
             android:id="@+id/exchanged_value_result"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:maxWidth="250dp"
             android:text="@{`= ` + viewModel.exchangeValue}"
             android:textSize="20sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/exchange_amount"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintBottom_toTopOf="@+id/currency_exchange_value"
+            app:layout_constraintEnd_toEndOf="@+id/currency_exchange_value"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/currency_exchange_value"
+            app:layout_constraintTop_toBottomOf="@+id/exchange_amount"
             tools:text="123.45 PLN" />
 
         <TextView
-            android:id="@+id/current_exchange_rate_title"
+            android:id="@+id/baseCurrencyTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/money_exchanger"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currency_date" />
+            android:text="Base Currency: EUR"
+            app:layout_constraintBottom_toTopOf="@+id/exchange_amount"
+            app:layout_constraintEnd_toEndOf="@+id/exchange_amount"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/exchange_amount"
+            app:layout_constraintTop_toBottomOf="@+id/current_exchange_rate_title" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/vertical_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

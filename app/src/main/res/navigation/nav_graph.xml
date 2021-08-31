@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_currency">
         <argument
             android:name="selectedProperty"
-            app:argType="com.jcellomarcano.fixercurrency.model.Currency"
+            app:argType="com.jcellomarcano.fixercurrency.model.Symbol"
             />
     </fragment>
 </navigation>

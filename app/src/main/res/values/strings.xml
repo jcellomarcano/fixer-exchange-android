@@ -8,4 +8,5 @@
     <string name="current_exchange_rate">Current rate</string>
     <string name="money_exchanger">Currency converter</string>
     <string name="amount_euro">Quantity Euro</string>
+    <string name="name_symbol">NameSymbol</string>
 </resources>
